@@ -4,7 +4,7 @@
 
 | Item | Requirement |
 |---|---|
-| CPU architecture | **x86_64 / amd64, arm64 / aarch64 or armv7 (armhf).** The image is built for `linux/amd64`, `linux/arm64` and `linux/arm/v7`; the engine is [outpace](https://github.com/jamezrin/outpace) |
+| CPU architecture | **x86_64 / amd64, arm64 / aarch64 or armv7 (armhf).** The image is built for `linux/amd64`, `linux/arm64` and `linux/arm/v7`; the engine is [outpace](https://github.com/jamezrin/outpace-stream) |
 | OS | Linux with Docker Engine and Docker Compose v2 |
 | Kernel | `/dev/net/tun` available (granted to gluetun via `devices:`); `NET_ADMIN` capability (granted in `docker-compose.yml`) |
 | Ports | Two free TCP ports on the host, by default **6878** (engine HTTP API) and **8080** (playlist server) |
@@ -50,7 +50,7 @@ Building locally (`docker compose up -d --build`) avoids GHCR entirely.
 
 ## Legal
 
-miniace-Outpace uses [outpace](https://github.com/jamezrin/outpace), an independent
+miniace-Outpace uses [outpace](https://github.com/jamezrin/outpace-stream), an independent
 open-source Rust implementation of the public AceStream live path, licensed
 under **AGPL-3.0-or-later**. The image copies the outpace binary from the
 official multi-arch image pinned by digest; the corresponding source is

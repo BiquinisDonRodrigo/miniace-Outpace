@@ -5,12 +5,13 @@
 miniace-Outpace includes the unmodified static binary of **outpace**, an independent
 implementation of the public AceStream live path.
 
-- Project: <https://github.com/jamezrin/outpace>
+- Project: <https://github.com/jamezrin/outpace-stream>
+- Author: <https://github.com/jamezrin>
 - Version: v0.5.0 (2026-10-20)
 - Licence: GNU Affero General Public License v3.0 or later
   (AGPL-3.0-or-later)
 - Corresponding source for this release:
-  <https://github.com/jamezrin/outpace/tree/v0.5.0>
+  <https://github.com/jamezrin/outpace-stream/tree/v0.5.0>
 - Licence text included in the image at
   `/usr/share/doc/outpace/LICENSE`
 

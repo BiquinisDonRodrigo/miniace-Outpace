@@ -20,7 +20,7 @@ gitignored; `.env.example` is the tracked template.
 
 ## Outpace tuning
 
-The engine is [outpace](https://github.com/jamezrin/outpace), a Rust
+The engine is [outpace](https://github.com/jamezrin/outpace-stream), a Rust
 implementation of the public AceStream live path. All engine settings are
 environment variables read at process start; changing one recreates the
 engine process on the next `docker compose up -d`.

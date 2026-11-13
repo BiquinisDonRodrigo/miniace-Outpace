@@ -3,7 +3,7 @@
 # + IPNS/IPFS playlist sync and HTTP playlist server, in a single container.
 #
 # outpace is a from-scratch Rust implementation of the public AceStream live
-# path (AGPL-3.0-or-later): https://github.com/jamezrin/outpace
+# path (AGPL-3.0-or-later): https://github.com/jamezrin/outpace-stream
 # The static binary and its licence are copied from the official multi-arch
 # image pinned below (v0.5.0); the repository does not vendor engine blobs.
 # See NOTICE and the legal section of README.md.

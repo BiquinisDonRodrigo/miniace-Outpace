@@ -7,9 +7,10 @@ ProtonVPN WireGuard tunnel with **dynamic P2P port forwarding**, plus
 **IPFS/IPNS M3U playlist** support for IPTV clients (TiviMate, VLC,
 Jellyfin, Kodi...).
 
-The engine is [outpace](https://github.com/jamezrin/outpace), an
-open-source Rust implementation of the public AceStream live path. The
-image is multi-arch: `linux/amd64`, `linux/arm64` and `linux/arm/v7`.
+The engine is [outpace](https://github.com/jamezrin/outpace-stream) by
+[@jamezrin](https://github.com/jamezrin), an open-source Rust
+implementation of the public AceStream live path. The image is multi-arch:
+`linux/amd64`, `linux/arm64` and `linux/arm/v7`.
 
 Three containers, one custom image:
 
@@ -388,7 +389,7 @@ wherever applicable, including those protected by
 
 By running or using a miniace-Outpace container that includes outpace, you
 acknowledge and accept the
-[GNU Affero General Public License v3.0](https://github.com/jamezrin/outpace/blob/v0.5.0/LICENSE)
+[GNU Affero General Public License v3.0](https://github.com/jamezrin/outpace-stream/blob/v0.5.0/LICENSE)
 insofar as it applies to outpace, and you must comply with its source-offer
 obligations when you redistribute the image. miniace-Outpace does not include the
 official closed-source AceStream engine.
@@ -397,7 +398,7 @@ You also agree to comply with the licences and terms applicable to the
 other software and services included in, required by or used through your
 deployment. These include:
 
-- [outpace](https://github.com/jamezrin/outpace) (AGPL-3.0-or-later).
+- [outpace](https://github.com/jamezrin/outpace-stream) (AGPL-3.0-or-later).
 - [Gluetun](https://github.com/passteque/gluetun/blob/master/LICENSE) (MIT).
 - [Kubo](https://github.com/ipfs/kubo/blob/v0.43.0/LICENSE) (MIT /
   Apache-2.0).
@@ -501,7 +502,7 @@ scripts, and the repository documentation — is released under the
 | Component | Licence / terms |
 |-----------|-----------------|
 | miniace-Outpace original code | [AGPL-3.0-or-later](LICENSE) |
-| [outpace](https://github.com/jamezrin/outpace) engine | [AGPL-3.0-or-later](https://github.com/jamezrin/outpace/blob/v0.5.0/LICENSE); static binary from the official v0.5.0 image, digest-pinned |
+| [outpace](https://github.com/jamezrin/outpace-stream) engine | [AGPL-3.0-or-later](https://github.com/jamezrin/outpace-stream/blob/v0.5.0/LICENSE); static binary from the official v0.5.0 image, digest-pinned |
 | [Gluetun](https://github.com/passteque/gluetun) | [MIT](https://github.com/passteque/gluetun/blob/master/LICENSE) |
 | [Kubo (IPFS)](https://github.com/ipfs/kubo) | [MIT / Apache-2.0](https://github.com/ipfs/kubo/blob/v0.43.0/LICENSE) |
 | `python:3.10-slim` base image and OS packages | Their respective licences |
@@ -517,7 +518,9 @@ their respective owners.
   port forwarding.
 - [Kubo](https://github.com/ipfs/kubo) — IPFS implementation powering the
   IPNS playlist resolution.
-- [outpace](https://github.com/jamezrin/outpace) — the Rust
-  AceStream-compatible engine.
+- [outpace](https://github.com/jamezrin/outpace-stream) by
+  [@jamezrin](https://github.com/jamezrin) — the Rust
+  AceStream-compatible engine this stack is built on. All credit for the
+  engine and its protocol work belongs to its author.
 - [AceStream](https://www.acestream.org/) — the protocol and ecosystem this
   stack interoperates with.

@@ -1,6 +1,6 @@
 # miniace-Outpace documentation
 
-miniace-Outpace runs [outpace](https://github.com/jamezrin/outpace), an
+miniace-Outpace runs [outpace](https://github.com/jamezrin/outpace-stream), an
 AceStream-compatible P2P engine, behind a ProtonVPN WireGuard tunnel with
 **dynamic P2P port forwarding**, and publishes **IPFS/IPNS M3U playlists**
 to IPTV clients. The whole stack is three containers driven by Docker
