@@ -5,9 +5,9 @@
 # outpace is a from-scratch Rust implementation of the public AceStream live
 # path (AGPL-3.0-or-later): https://github.com/jamezrin/outpace-stream
 # The static binary and its licence are copied from the official multi-arch
-# image pinned below (v0.5.0); the repository does not vendor engine blobs.
+# image pinned below (1.0.0); the repository does not vendor engine blobs.
 # See NOTICE and the legal section of README.md.
-FROM ghcr.io/jamezrin/outpace@sha256:c15f70186cc797222e7feed2a697c40d2498849b2ef11c4d3c6fe6f0d51e1624 AS outpace
+FROM ghcr.io/jamezrin/outpace@sha256:4d8bbcdc38ca787afb2f7e5c8bdf8a5ce0d81996094bf72e674b751237cd3b48 AS outpace
 
 FROM python:3.10-slim
 

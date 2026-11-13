@@ -7,7 +7,7 @@ a single container, and is built for `linux/amd64`, `linux/arm64` and
 
 ## Dockerfile
 
-- Stage `outpace`: `ghcr.io/jamezrin/outpace` pinned by the v0.5.0
+- Stage `outpace`: `ghcr.io/jamezrin/outpace` pinned by the 1.0.0
   multi-arch index digest. It provides the static `outpace` binary and its
   AGPL-3.0 licence.
 - Final base: `python:3.10-slim` (the playlist sync uses only the standard

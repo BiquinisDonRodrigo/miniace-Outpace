@@ -6,9 +6,9 @@ AceStream live path.
 
   Project:  https://github.com/jamezrin/outpace-stream
   Author:   https://github.com/jamezrin
-  Version:  v0.5.0
+  Version:  1.0.0
   Licence:  AGPL-3.0-or-later
-  Source:   https://github.com/jamezrin/outpace-stream/tree/v0.5.0
+  Source:   https://github.com/jamezrin/outpace-stream/tree/v1.0.0
 
 The outpace binary is unmodified and is copied from the official multi-arch
 image pinned in the Dockerfile. The licence text is installed at

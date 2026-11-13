@@ -12,7 +12,7 @@
 #
 # outpace is a from-scratch Rust implementation of the public AceStream
 # live path (AGPL-3.0-or-later). It exposes the same /ace/getstream
-# contract miniace-Outpace clients use, behind OUTPACE_EXPERIMENTAL_ACE_COMPAT=1.
+# contract miniace-Outpace clients use, behind OUTPACE_ACE_COMPAT=1.
 
 STATE_DIR="${STATE_DIR:-/tmp/miniace-outpace}"
 GLUETUN_P2P_PORT_FILE="$STATE_DIR/gluetun_p2p_port"
@@ -183,7 +183,7 @@ start_outpace() {
   OUTPACE_ENABLE_INBOUND="$OUTPACE_ENABLE_INBOUND" \
   OUTPACE_ENABLE_SEEDING="$OUTPACE_ENABLE_SEEDING" \
   OUTPACE_ENABLE_PORT_MAPPING=0 \
-  OUTPACE_EXPERIMENTAL_ACE_COMPAT=1 \
+  OUTPACE_ACE_COMPAT=1 \
   "$OUTPACE_BIN" serve 2>&1 &
 }
 

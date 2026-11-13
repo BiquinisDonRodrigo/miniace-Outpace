@@ -7,17 +7,17 @@ implementation of the public AceStream live path.
 
 - Project: <https://github.com/jamezrin/outpace-stream>
 - Author: <https://github.com/jamezrin>
-- Version: v0.5.0 (2026-10-20)
+- Version: 1.0.0 (2026-11-13)
 - Licence: GNU Affero General Public License v3.0 or later
   (AGPL-3.0-or-later)
 - Corresponding source for this release:
-  <https://github.com/jamezrin/outpace-stream/tree/v0.5.0>
+  <https://github.com/jamezrin/outpace-stream/tree/v1.0.0>
 - Licence text included in the image at
   `/usr/share/doc/outpace/LICENSE`
 
 The binary is copied from the official multi-arch image
-`ghcr.io/jamezrin/outpace@sha256:c15f70186cc797222e7feed2a697c40d2498849b2ef11c4d3c6fe6f0d51e1624`
-(v0.5.0). It is not modified by miniace-Outpace.
+`ghcr.io/jamezrin/outpace@sha256:4d8bbcdc38ca787afb2f7e5c8bdf8a5ce0d81996094bf72e674b751237cd3b48`
+(1.0.0). It is not modified by miniace-Outpace.
 
 If you redistribute a miniace-Outpace image that contains outpace, comply with the
 AGPL: keep the licence notice and provide access to the corresponding
