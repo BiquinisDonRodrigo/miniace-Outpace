@@ -50,7 +50,7 @@ Pure function and variable definitions (no side effects when sourced):
 | `port_watch_loop` | Detects rotations and restarts the engine |
 | `engine_init` | Validates configuration, creates data/cache dirs and checks Gluetun |
 
-The supervisor forces `OUTPACE_EXPERIMENTAL_ACE_COMPAT=1` (the
+The supervisor forces `OUTPACE_ACE_COMPAT=1` (the
 `/ace/getstream` contract used by the playlists),
 `OUTPACE_ENABLE_PORT_MAPPING=0` (Gluetun owns NAT-PMP) and
 `OUTPACE_BIND=0.0.0.0:6878`. Behavior details in

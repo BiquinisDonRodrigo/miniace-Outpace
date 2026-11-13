@@ -29,7 +29,7 @@ in `$STATE_DIR/active_p2p_port`.
 
 - `OUTPACE_PEER_LISTEN=0.0.0.0:<forwarded>` — the announced P2P port;
 - `OUTPACE_BIND=0.0.0.0:6878` — the HTTP API;
-- `OUTPACE_EXPERIMENTAL_ACE_COMPAT=1` — the `/ace/getstream` contract used
+- `OUTPACE_ACE_COMPAT=1` — the `/ace/getstream` contract used
   by the generated playlists;
 - `OUTPACE_ENABLE_PORT_MAPPING=0` — Gluetun owns the NAT-PMP mapping;
 - the `OUTPACE_*` tuning documented in

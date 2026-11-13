@@ -56,9 +56,10 @@ The supervisor sets these values and they are not meant to be overridden:
   loopback-only and is not published.
 - `OUTPACE_DATA_DIR=/acestream/outpace`.
 - `OUTPACE_ENABLE_PORT_MAPPING=0` — Gluetun owns the NAT-PMP mapping.
-- `OUTPACE_EXPERIMENTAL_ACE_COMPAT=1` — required by the generated
+- `OUTPACE_ACE_COMPAT=1` — required by the generated
   `/ace/getstream` playlists. Outpace's native `/streams` API remains the
-  supported surface; the compatibility routes are experimental.
+  supported surface; the compatibility routes are the documented
+  AceStream-compatible subset.
 
 ## Engine behavior
 
