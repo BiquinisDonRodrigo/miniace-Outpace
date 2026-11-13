@@ -1,0 +1,104 @@
+services:
+  # VPN gateway. Official Gluetun image (upstream: github.com/passteque/gluetun,
+  # also published as qmcgaw/gluetun and ghcr.io/qdm12/gluetun). Pinned to the
+  # 2026-09-26 multi-arch index digest (commit ded7fd0), which includes the
+  # NAT-PMP client fix to retry transient "connection refused" renewals
+  # instead of tearing down the forwarded port (gluetun #3462, fixed by
+  # #3464). Bump the digest deliberately when upgrading.
+  # Negotiates the ProtonVPN NAT-PMP forwarded port and publishes it on its
+  # control server (:8001, loopback-only inside the shared network namespace).
+  gluetun:
+    image: qmcgaw/gluetun@sha256:2733bb22b27e3efa7a9f2cef9057ec12791b8b225793fcd3dbfd0508404dfc25
+    container_name: miniace-outpace-gluetun
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    environment:
+      - VPN_SERVICE_PROVIDER=protonvpn
+      - VPN_TYPE=wireguard
+      - WIREGUARD_PRIVATE_KEY=${WG_PRIVATE_KEY}
+      - SERVER_COUNTRIES=${PROTON_COUNTRIES:-Netherlands}
+      - VPN_PORT_FORWARDING=on
+      - VPN_PORT_FORWARDING_PROVIDER=protonvpn
+      - PORT_FORWARD_ONLY=on
+      - HTTP_CONTROL_SERVER_ADDRESS=:8001
+      - HTTP_CONTROL_SERVER_AUTH_DEFAULT_ROLE={"auth":"none"}
+      - HEALTH_TARGET_ADDRESSES=cloudflare.com:80
+      - FIREWALL_INPUT_PORTS=6878,8080
+      - FIREWALL_OUTBOUND_SUBNETS=${DOCKER_SUBNET:-172.30.0.0/24}
+      - TZ=${TZ:-Europe/Madrid}
+    volumes:
+      - ./data/gluetun:/tmp/gluetun
+    ports:
+      - "${ACESTREAM_HTTP_PORT:-6878}:6878"
+      - "${PLAYLISTS_PORT:-8080}:8080"
+    restart: unless-stopped
+
+  # outpace engine + Gluetun port supervision + IPNS playlist sync.
+  # The only custom image in the stack; shares gluetun's network namespace
+  # so the engine binds exactly the P2P port announced by ProtonVPN.
+  # The image is built for linux/amd64, linux/arm64 and linux/arm/v7.
+  acestream:
+    build:
+      context: ./images/outpace
+    image: ghcr.io/biquinisdonrodrigo/miniace-outpace:latest
+    container_name: miniace-outpace-acestream
+    init: true
+    network_mode: "service:gluetun"
+    depends_on:
+      - gluetun
+    environment:
+      - TZ=${TZ:-Europe/Madrid}
+      - PUBLIC_PORT=${ACESTREAM_HTTP_PORT:-6878}
+      - IPFS_GATEWAY=${IPFS_GATEWAY:-http://kubo:48080}
+      # ipfs.io, dweb.link and w3s.link retired on 2026-09-21; any fallback
+      # added here must serve both /ipfs/ and /ipns/ paths.
+      - IPFS_FALLBACK_GATEWAYS=${IPFS_FALLBACK_GATEWAYS:-https://ipfs.filebase.io}
+      - SYNC_INTERVAL=${SYNC_INTERVAL:-3600}
+      # outpace tuning. See 13 Configuration for units and defaults.
+      - OUTPACE_CACHE_TYPE=${OUTPACE_CACHE_TYPE:-memory}
+      - OUTPACE_SEED_STORE_BYTES=${OUTPACE_SEED_STORE_BYTES:-134217728}
+      - OUTPACE_SEED_RETENTION_SECS=${OUTPACE_SEED_RETENTION_SECS:-45}
+      - OUTPACE_MAX_INBOUND=${OUTPACE_MAX_INBOUND:-64}
+      - OUTPACE_MAX_ACTIVE_UPSTREAMS=${OUTPACE_MAX_ACTIVE_UPSTREAMS:-4}
+      - OUTPACE_MAX_PARALLEL_CONNECT=${OUTPACE_MAX_PARALLEL_CONNECT:-12}
+      - OUTPACE_SESSION_BUFFER=${OUTPACE_SESSION_BUFFER:-256}
+      - OUTPACE_PREBUFFER_BYTES=${OUTPACE_PREBUFFER_BYTES:-134217728}
+      - OUTPACE_ENABLE_INBOUND=${OUTPACE_ENABLE_INBOUND:-1}
+      - OUTPACE_ENABLE_SEEDING=${OUTPACE_ENABLE_SEEDING:-1}
+      - PORT_WATCH_INTERVAL_S=${PORT_WATCH_INTERVAL_S:-10}
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+    volumes:
+      - ./data:/data
+      - ./data/gluetun:/tmp/gluetun
+      - ./data/acestream:/acestream
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    stop_grace_period: 30s
+    restart: unless-stopped
+
+  # Local IPFS node. Official Kubo image; resolves the IPNS playlists.
+  # The only addition is a one-line /container-init.d script that moves the
+  # HTTP gateway to 0.0.0.0:48080 so the acestream container can reach it.
+  kubo:
+    image: ipfs/kubo:v0.43.0
+    container_name: miniace-outpace-kubo
+    environment:
+      - IPFS_PROFILE=server
+    volumes:
+      - ./data/ipfs:/data/ipfs
+      - ./kubo/001-gateway-port.sh:/container-init.d/001-gateway-port.sh:ro
+    restart: unless-stopped
+
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: ${DOCKER_SUBNET:-172.30.0.0/24}
